@@ -33,10 +33,12 @@
  *  represented by a unique sequence of dots and dashes(dits and dahs).
  * 
  * This program can do the following:
- *	[ ] Convert 'text to morse' and 'morse to text' from 
- * 		both stdin or a text-file
- *	[ ] Write in morse code directly with the possibility to switch between
- *		morse code and text.  
+ *	# Convert 'text to morse' and 'morse to text' from:
+ * 		[X]	 stdin
+ *		[ ]	 text-file
+ *	# Write in morse code:
+ *		[ ]	 directly 
+ *		[ ]	 with the possibility to switch between morse code and text.  
  *
  * We can use Dichotomic-Search, it is a search algorithm that operates by selecting
  *	between two distinct alternatives (dichotomies) at each step. A good example
