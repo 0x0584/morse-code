@@ -61,7 +61,7 @@
 # include <stdio.h>		/* fputc(), fputs() */
 # include <stdlib.h>		/* calloc() */
 # include <string.h>		/* memcpy() */
-# include <ctype.h>		/* isalpha(), isdigit() */
+# include <ctype.h>		/* isalpha(), isdigit(), toupper()*/
 
 /* indexes of Morse-Array */
 # define ALPHA 0
@@ -188,8 +188,14 @@ void decoder(const char *);
 int
 main()
 {
+  make();
+
+  encoder("HELLO WORLD");
+  decoder(".... . .-.. .-.. --- / .-- --- .-. .-.. -..");
+  drop(); 
   return 0;
 }
+
 void
 make(void)
 {
@@ -275,7 +281,7 @@ encoder(const char *s)
   for(;; ++s){
     char ch = *s;
     if(ch == '\0') break;
-    else if(isalpha(ch)) fputs(M[ALPHA][ch - 'A'], stdout);
+    else if(isalpha(ch)) ch = toupper(ch), fputs(M[ALPHA][ch - 'A'], stdout);
     else if(isdigit(ch)) fputs(M[NUMERAL][ch - '0'], stdout);
     else if(ch == ' ') fputc('/', stdout);
     fputc(' ', stdout);
