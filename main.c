@@ -188,3 +188,59 @@ main()
 {
   return 0;
 }
+void
+make(void)
+{
+  int i;
+  
+  root = (struct tree *) calloc(1, sizeof(*root));
+  root->c = '/';
+  
+  for(i = 0; i < 26; ++i) insert(M[ALPHA][i], ('A' + i));
+    
+  for(i = 0; i < 10; ++i) insert(M[NUMERAL][i], ('0' + i));
+}
+
+static void
+_insert(struct tree **r, const char *s, char ch)
+{
+  if(*r == NULL) *r = (struct tree *) calloc(1, sizeof(struct tree **));
+  if(*s == '\0') (*r)->c = ch;
+  else if(*s == '.') _insert(&(*r)->dit, ++s, ch);
+  else if(*s == '-') _insert(&(*r)->dah, ++s, ch);
+}
+
+static inline void
+insert(const char *s, char ch)
+{
+  if(*s == '.') _insert(&root->dit, ++s, ch);
+  else if(*s == '-') _insert(&root->dah, ++s, ch);
+}
+
+void
+_drop(struct tree *r)
+{
+  if(r){
+    _drop(r->dit);
+    _drop(r->dah);
+    free(r);
+  }
+}
+
+void
+drop(void)
+{
+  _drop(root);
+}
+
+void
+_decoder(struct tree *r,const char *s)
+{
+  
+}
+
+void
+decoder(const char *s)
+{
+  
+}
