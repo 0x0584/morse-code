@@ -58,9 +58,11 @@
  *  0     9    8	 7		     6 1		  2	    3    4     5 
  */
 
-# include <stdio.h>		/* fputc */
+# include <stdio.h>		/* fputc(), fputs() */
 # include <stdlib.h>		/* calloc() */
 # include <string.h>		/* memcpy() */
+# include <ctype.h>		/* isalpha(), isdigit() */
+
 /* indexes of Morse-Array */
 # define ALPHA 0
 # define NUMERAL 1
@@ -264,4 +266,19 @@ decoder(const char *s)
       break;
     }
   }
+  fputc('\n', stdout);
+}
+
+void
+encoder(const char *s)
+{
+  for(;; ++s){
+    char ch = *s;
+    if(ch == '\0') break;
+    else if(isalpha(ch)) fputs(M[ALPHA][ch - 'A'], stdout);
+    else if(isdigit(ch)) fputs(M[NUMERAL][ch - '0'], stdout);
+    else if(ch == ' ') fputc('/', stdout);
+    fputc(' ', stdout);
+  }
+  fputc('\n', stdout);
 }
