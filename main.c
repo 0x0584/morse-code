@@ -58,9 +58,9 @@
  *  0     9    8	 7		     6 1		  2	    3    4     5 
  */
 
-# include <stdio.h>
-# include <stdlib.h>
-
+# include <stdio.h>		/* fputc */
+# include <stdlib.h>		/* calloc() */
+# include <string.h>		/* memcpy() */
 /* indexes of Morse-Array */
 # define ALPHA 0
 # define NUMERAL 1
@@ -236,11 +236,32 @@ drop(void)
 void
 _decoder(struct tree *r,const char *s)
 {
-  
+  if(r == NULL) return;
+  if(*s == '\0') fputc(r->c, stdout);
+  else if(*s == '/') fputc(' ', stdout);
+  else if(*s == '.') _decoder(r->dit, ++s);
+  else if(*s == '-') _decoder(r->dah, ++s);
 }
 
 void
 decoder(const char *s)
 {
+  char *str;
   
+  while(*s){
+    str = (char *) strchr(s, ' ');
+    if(str){
+      if((str - s) != 0){
+	char c[(str - s) + 1];
+	memcpy(c, s, (str - s));
+	c[(str - s)] = '\0';
+	_decoder(root, c);
+      }
+      s = str + 1;
+    }
+    else {
+      _decoder(root, s);
+      break;
+    }
+  }
 }
