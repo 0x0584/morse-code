@@ -60,63 +60,74 @@ drop(void)
 }
 
 void
-_decoder(struct tree *r,const char *s)
+_decoder(struct tree *r,const char *s, FILE *f)
 {
   if(r == NULL) return;
   if(*s == '\0') fputc(r->c, stdout);
   else if(*s == '/') fputc(' ', stdout);
   else if(*s == '\n') fputc('\n', stdout);
   else if(*s == '\t') fputc('\t', stdout);
-  else if(*s == '.') _decoder(r->dit, ++s);
-  else if(*s == '-') _decoder(r->dah, ++s);
+  else if(*s == '.') _decoder(r->dit, ++s, f);
+  else if(*s == '-') _decoder(r->dah, ++s, f);
 }
 
 void
-decoder(const char *s)
+fdecoder(const char *s, FILE *f)
 {
   char *str;
   
-  while(*s){
+  while(*s) {
     str = (char *) strchr(s, ' ');
     if(str) {
       if((str - s) != 0) {
 	char c[(str - s) + 1];
 	memcpy(c, s, (str - s));
 	c[(str - s)] = '\0';
-	_decoder(root, c);
+	_decoder(root, c, f);
       }
       s = str + 1;
     }
     else {
-      _decoder(root, s);
+      _decoder(root, s, f);
       break;
     }
   }
-  fputc('\n', stdout);
+  fputc('\n', f);
+}
+
+
+void
+fencoder(const char *s, FILE *f)
+{
+  for(;; ++s) {
+    char ch = *s;
+    if(ch == '\0') break;
+    else if(isalpha(ch)) ch = toupper(ch), fputs(M[ALPHA][ch - 'A'], f);
+    else if(isdigit(ch)) fputs(M[NUMERAL][ch - '0'], f);
+    else if(ch == ' ') fputc('/', f);
+    else if(ch == '\n') {
+      fputc('\n', f);
+      continue;
+    }
+    else if(ch == '\t') {
+      fputc('\t', f);
+      continue;
+    }
+    fputc(' ', f);
+  }
+  fputc('\n', f);
 }
 
 void
 encoder(const char *s)
 {
-  for(;; ++s) {
-    char ch = *s;
-    if(ch == '\0') break;
-    else if(isalpha(ch)) ch = toupper(ch), fputs(M[ALPHA][ch - 'A'], stdout);
-    else if(isdigit(ch)) fputs(M[NUMERAL][ch - '0'], stdout);
-    else if(ch == ' ') fputc('/', stdout);
-    else if(ch == '\n') {
-      fputc('\n', stdout);
-      continue;
-    }
-    else if(ch == '\t') {
-      fputc('\t', stdout);
-      continue;
-    }
-    fputc(' ', stdout);
-  }
-  fputc('\n', stdout);
+  fencoder(s,stdout);
 }
-
+void
+decoder(const char *s)
+{
+  fdecoder(s, stdout);
+}
 char*
 readf (const char *dir)
 {
@@ -150,15 +161,15 @@ fcoder(const char *path, void(*mode)(const char *))
   char *s;
   
   if((s = readf(path))) mode(s);
-  else fputs("NO FILE WAS FOUND!",stderr);  
-  
+  else fputs("NO FILE WAS FOUND!",stderr);    
 }
-void fdecoder(const char *s)
+
+void decodef(const char *s)
 {
   fcoder(s, decoder);
 }
 
-void fencoder(const char *s)
+void encodef(const char *s)
 {
   fcoder(s, encoder);
 }

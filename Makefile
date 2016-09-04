@@ -5,6 +5,7 @@ LDFLAGS = -I.
 OBJ = main.o libmorse.o init.o
 DEPS = libmorse.h
 EXEC = morse
+ARGS =
 
 all: main
 #	@echo "Finish."
@@ -21,6 +22,8 @@ main: $(OBJ)
 	$(CC) $(CFLAGS) -c -o $@ $< $(LDFLAGS)
 #	@echo " "
 
+run: clean all
+	./$(EXEC) $(ARGS)
 clean:
 	@echo "Cleaning up.."
 	rm -f $(EXEC)

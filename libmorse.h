@@ -58,7 +58,8 @@ void encoder(const char *);
  *	r:	The Morse tree.
  *	s:	the string to decode.
  */
-void _decoder(struct tree *, const char *);
+void _decoder(struct tree *, const char *, FILE *);
+
 
 /* decoder(s)
  *	Decode Morse code into text
@@ -92,7 +93,7 @@ char* readf(const char *);
  * @PARAMETERS:
  *	p:	Path to the text-file
  */
-void fdecoder(const char *);
+void fencoder(const char *, FILE *);
 
 /* fencoder(p)
  *	Call fcoder() passing encoder
@@ -100,6 +101,7 @@ void fdecoder(const char *);
  * @PARAMETERS:
  *	p:	Path to text-file
  */
-void fencoder(const char *);
-
+void fdecoder(const char *, FILE *);
+void decodef(const char *s);
+void encodef(const char *s);
 # endif /* LIBMORSE_H */

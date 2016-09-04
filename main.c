@@ -68,17 +68,27 @@ main()
 {
   /* Setup the tree */
   make();
-
-  /* encoder("HELLO WORLD"); */
-  /* decoder(".... . .-.. .-.. --- / .-- --- .-. .-.. -.."); */
-  puts(readf("morse.txt"));
+  /* printf("\033[2J\033[;H"); */
+  /* printf("\033[2J\033[0;0H"); */
+  printf("\033\143");
+  puts("-----encoder-test-----\n");
+  encoder("HELLO WORLD");
+  getchar();
+  printf("\033\143");
+  puts("-----decoder-test-----\n");
+  decoder(".... . .-.. .-.. --- / .-- --- .-. .-.. -..");
+  getchar();
+  printf("\033\143");
   puts("-----fdecoder-test-----\n");
-  fdecoder("morse.txt");
-  puts("");
-  puts(readf("text.txt"));
+  puts(readf("morse.txt"));
+  decodef("morse.txt");
+  getchar();
+  /* puts(""); */
+  printf("\033\143");
   puts("-----fencoder-test-----\n");
-  fencoder("text.txt");
-
+  puts(readf("text.txt"));
+  encodef("text.txt");
+  printf("\033\143");  
   /* Drop the tree */
   drop(); 
 
