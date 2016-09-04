@@ -51,6 +51,8 @@ _decoder(struct tree *r,const char *s)
   if(r == NULL) return;
   if(*s == '\0') fputc(r->c, stdout);
   else if(*s == '/') fputc(' ', stdout);
+  else if(*s == '\n') fputc('\n', stdout);
+  else if(*s == '\t') fputc('\t', stdout);
   else if(*s == '.') _decoder(r->dit, ++s);
   else if(*s == '-') _decoder(r->dah, ++s);
 }
@@ -62,8 +64,8 @@ decoder(const char *s)
   
   while(*s){
     str = (char *) strchr(s, ' ');
-    if(str){
-      if((str - s) != 0){
+    if(str) {
+      if((str - s) != 0) {
 	char c[(str - s) + 1];
 	memcpy(c, s, (str - s));
 	c[(str - s)] = '\0';
@@ -82,14 +84,68 @@ decoder(const char *s)
 void
 encoder(const char *s)
 {
-  for(;; ++s){
+  for(;; ++s) {
     char ch = *s;
     if(ch == '\0') break;
     else if(isalpha(ch)) ch = toupper(ch), fputs(M[ALPHA][ch - 'A'], stdout);
     else if(isdigit(ch)) fputs(M[NUMERAL][ch - '0'], stdout);
     else if(ch == ' ') fputc('/', stdout);
+    else if(ch == '\n') {
+      fputc('\n', stdout);
+      continue;
+    }
+    else if(ch == '\t') {
+      fputc('\t', stdout);
+      continue;
+    }
     fputc(' ', stdout);
   }
   fputc('\n', stdout);
 }
 
+char*
+readf (const char *dir)
+{
+  char *buffer = NULL;
+  FILE *handler;
+
+  if ((handler = fopen(dir, "r"))) {
+    int string_size, read_size;
+
+    fseek(handler, 0, SEEK_END);
+    string_size = ftell(handler);
+    rewind(handler);
+
+    buffer = (char*) malloc( sizeof(char) * (string_size + 1) );
+        
+    read_size = fread(buffer, sizeof(char), string_size, handler);
+    buffer[string_size] = '\0';
+
+    if (string_size != read_size) {
+      free(buffer);
+      buffer = NULL;
+    }
+    fclose(handler);
+  }
+  return buffer;
+}
+
+void 
+fcoder(const char *path, void(*mode)(const char *))
+{
+  /* char *s = (char *) rfile("test.txt"); */
+  char *s;
+  
+  if((s = readf(path))) mode(s);
+  else fputs("NO FILE WAS FOUND!",stderr);  
+  
+}
+void fdecoder(const char *s)
+{
+  fcoder(s, decoder);
+}
+
+void fencoder(const char *s)
+{
+  fcoder(s, encoder);
+}

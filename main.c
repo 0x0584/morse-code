@@ -66,10 +66,21 @@
 int
 main()
 {
+  /* Setup the tree */
   make();
 
-  encoder("HELLO WORLD");
-  decoder(".... . .-.. .-.. --- / .-- --- .-. .-.. -..");
+  //encoder("HELLO WORLD");
+  //decoder(".... . .-.. .-.. --- / .-- --- .-. .-.. -..");
+  puts(readf("morse.txt"));
+  puts("-----fdecoder-test-----\n");
+  fdecoder("morse.txt");
+  puts("");
+  puts(readf("text.txt"));
+  puts("-----fencoder-test-----\n");
+  fencoder("text.txt");
+
+  /* Drop the tree */
   drop(); 
+
   return 0;
 }
