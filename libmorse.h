@@ -18,69 +18,12 @@ struct tree {
 } *root;
 
 /* <-----------------------( Global Variables )---------------------> */
-/* Morse code characters */
-static const char *alpha[] = {
-  ".-",   /* A */
-  "-...", /* B */
-  "-.-.", /* C */
-  "-..",  /* D */
-  ".",    /* E */
-  "..-.", /* F */
-  "--.",  /* G */
-  "....", /* H */
-  "..",   /* I */
-  ".---", /* J */
-  "-.-",  /* K */
-  ".-..", /* L */
-  "--",   /* M */
-  "-.",   /* N */
-  "---",  /* O */
-  ".--.", /* P */
-  "--.-", /* Q */
-  ".-.",  /* R */
-  "...",  /* S */
-  "-",    /* T */
-  "..-",  /* U */
-  "...-", /* V */
-  ".--",  /* W */
-  "-..-", /* X */
-  "-.--", /* Y */
-  "--..", /* Z */
-};
-/* Morse code numerals */
-static const char *numeral[] = {
-  "-----", /* 0 */
-  ".----", /* 1 */
-  "..---", /* 2 */
-  "...--", /* 3 */
-  "....-", /* 4 */
-  ".....", /* 5 */
-  "-....", /* 6 */
-  "--...", /* 7 */
-  "---..", /* 8 */
-  "----.", /* 9 */
-};
-/* Morse code array */
-static const char **M[] = {alpha, numeral};
+
+extern const char /* Morse code characters */ *alpha[],
+  /* Morse code numerals */ *numeral[],
+  /* Morse code array */ **M[];
 
 /* <---------------------( Function-Prototypes )---------------------> */
-/* _insert(r, s, ch) (recursive) 
- *
- * @PARAMETERS:
- *	r:	The root tree.
- *	s:	string contanes morse code.
- *	ch:	The characters value of the passed morse string.
- */
-static void _insert(struct tree **, const char *, char );
-
-/* insert(s, ch)
- *	 *I do not find something to describe this one with!*
- *
- * @PARAMETERS:
- *	s:	morse string.
- *	ch:     char value of morse string.
- */
-static inline void insert( const char *, char );
 
 /* make()
  *      Fill Morse-tree.

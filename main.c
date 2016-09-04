@@ -22,7 +22,7 @@
 /* along with this program; if not, write to the Free Software		*/
 /* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,		*/
 /* MA  02110-1301, USA.							*/
-/* 	Last modification: 08/31/2016-20:11:29				*/
+/* 	Last modification: 09/04/2016-04:23:42				*/
 /************************************************************************/
 
 /* <-----------------------------------( Abstraction )-----------------------------------> */
@@ -69,8 +69,8 @@ main()
   /* Setup the tree */
   make();
 
-  //encoder("HELLO WORLD");
-  //decoder(".... . .-.. .-.. --- / .-- --- .-. .-.. -..");
+  /* encoder("HELLO WORLD"); */
+  /* decoder(".... . .-.. .-.. --- / .-- --- .-. .-.. -.."); */
   puts(readf("morse.txt"));
   puts("-----fdecoder-test-----\n");
   fdecoder("morse.txt");

@@ -1,5 +1,35 @@
 # include "libmorse.h"
 
+/* _insert(r, s, ch) (recursive) 
+ *
+ * @PARAMETERS:
+ *	r:	The root tree.
+ *	s:	string contanes morse code.
+ *	ch:	The characters value of the passed morse string.
+ */
+static void
+_insert(struct tree **r, const char *s, char ch)
+{
+  if(*r == NULL) *r = (struct tree *) calloc(1, sizeof(struct tree **));
+  if(*s == '\0') (*r)->c = ch;
+  else if(*s == '.') _insert(&(*r)->dit, ++s, ch);
+  else if(*s == '-') _insert(&(*r)->dah, ++s, ch);
+}
+
+/* insert(s, ch)
+ *	 *I do not find something to describe this one with!*
+ *
+ * @PARAMETERS:
+ *	s:	morse string.
+ *	ch:     char value of morse string.
+ */
+static inline void
+insert(const char *s, char ch)
+{
+  if(*s == '.') _insert(&root->dit, ++s, ch);
+  else if(*s == '-') _insert(&root->dah, ++s, ch);
+}
+
 void
 make(void)
 {
@@ -11,22 +41,6 @@ make(void)
   for(i = 0; i < 26; ++i) insert(M[ALPHA][i], ('A' + i));
     
   for(i = 0; i < 10; ++i) insert(M[NUMERAL][i], ('0' + i));
-}
-
-static void
-_insert(struct tree **r, const char *s, char ch)
-{
-  if(*r == NULL) *r = (struct tree *) calloc(1, sizeof(struct tree **));
-  if(*s == '\0') (*r)->c = ch;
-  else if(*s == '.') _insert(&(*r)->dit, ++s, ch);
-  else if(*s == '-') _insert(&(*r)->dah, ++s, ch);
-}
-
-static inline void
-insert(const char *s, char ch)
-{
-  if(*s == '.') _insert(&root->dit, ++s, ch);
-  else if(*s == '-') _insert(&root->dah, ++s, ch);
 }
 
 void
@@ -133,7 +147,6 @@ readf (const char *dir)
 void 
 fcoder(const char *path, void(*mode)(const char *))
 {
-  /* char *s = (char *) rfile("test.txt"); */
   char *s;
   
   if((s = readf(path))) mode(s);
