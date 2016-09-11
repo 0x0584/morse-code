@@ -7,14 +7,8 @@
  *	s:	string contanes morse code.
  *	ch:	The characters value of the passed morse string.
  */
-static void
-_insert(struct tree **r, const char *s, char ch)
-{
-  if(*r == NULL) *r = (struct tree *) calloc(1, sizeof(struct tree **));
-  if(*s == '\0') (*r)->c = ch;
-  else if(*s == '.') _insert(&(*r)->dit, ++s, ch);
-  else if(*s == '-') _insert(&(*r)->dah, ++s, ch);
-}
+static void _insert(struct tree **r, const char *s, char ch);
+
 
 /* insert(s, ch)
  *	 *I do not find something to describe this one with!*
@@ -23,11 +17,22 @@ _insert(struct tree **r, const char *s, char ch)
  *	s:	morse string.
  *	ch:     char value of morse string.
  */
+static inline void insert(const char *s, char ch);
+
 static inline void
 insert(const char *s, char ch)
 {
   if(*s == '.') _insert(&root->dit, ++s, ch);
   else if(*s == '-') _insert(&root->dah, ++s, ch);
+}
+
+static void
+_insert(struct tree **r, const char *s, char ch)
+{
+  if(*r == NULL) *r = (struct tree *) calloc(1, sizeof(struct tree **));
+  if(*s == '\0') (*r)->c = ch;
+  else if(*s == '.') _insert(&(*r)->dit, ++s, ch);
+  else if(*s == '-') _insert(&(*r)->dah, ++s, ch);
 }
 
 void
@@ -59,75 +64,6 @@ drop(void)
   _drop(root);
 }
 
-void
-_decoder(struct tree *r,const char *s, FILE *f)
-{
-  if(r == NULL) return;
-  if(*s == '\0') fputc(r->c, stdout);
-  else if(*s == '/') fputc(' ', stdout);
-  else if(*s == '\n') fputc('\n', stdout);
-  else if(*s == '\t') fputc('\t', stdout);
-  else if(*s == '.') _decoder(r->dit, ++s, f);
-  else if(*s == '-') _decoder(r->dah, ++s, f);
-}
-
-void
-fdecoder(const char *s, FILE *f)
-{
-  char *str;
-  
-  while(*s) {
-    str = (char *) strchr(s, ' ');
-    if(str) {
-      if((str - s) != 0) {
-	char c[(str - s) + 1];
-	memcpy(c, s, (str - s));
-	c[(str - s)] = '\0';
-	_decoder(root, c, f);
-      }
-      s = str + 1;
-    }
-    else {
-      _decoder(root, s, f);
-      break;
-    }
-  }
-  fputc('\n', f);
-}
-
-
-void
-fencoder(const char *s, FILE *f)
-{
-  for(;; ++s) {
-    char ch = *s;
-    if(ch == '\0') break;
-    else if(isalpha(ch)) ch = toupper(ch), fputs(M[ALPHA][ch - 'A'], f);
-    else if(isdigit(ch)) fputs(M[NUMERAL][ch - '0'], f);
-    else if(ch == ' ') fputc('/', f);
-    else if(ch == '\n') {
-      fputc('\n', f);
-      continue;
-    }
-    else if(ch == '\t') {
-      fputc('\t', f);
-      continue;
-    }
-    fputc(' ', f);
-  }
-  fputc('\n', f);
-}
-
-void
-encoder(const char *s)
-{
-  fencoder(s,stdout);
-}
-void
-decoder(const char *s)
-{
-  fdecoder(s, stdout);
-}
 char*
 readf (const char *dir)
 {
@@ -162,14 +98,4 @@ fcoder(const char *path, void(*mode)(const char *))
   
   if((s = readf(path))) mode(s);
   else fputs("NO FILE WAS FOUND!",stderr);    
-}
-
-void decodef(const char *s)
-{
-  fcoder(s, decoder);
-}
-
-void encodef(const char *s)
-{
-  fcoder(s, encoder);
 }

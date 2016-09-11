@@ -43,32 +43,6 @@ void _drop(struct tree *);
  */
 void drop(void);
 
-/* encoder(s)
- *	Encode into morse code, convert text to morse code.
- *
- * @PARAMETERS:
- *	s:	string contains morse code.
- */
-void encoder(const char *);
-
-/* _decode(r, s)
- *	Follow the morse binary tree to decode the passed string.
- *
- * @PARAMETERS:
- *	r:	The Morse tree.
- *	s:	the string to decode.
- */
-void _decoder(struct tree *, const char *, FILE *);
-
-
-/* decoder(s)
- *	Decode Morse code into text
- *
- * @PARAMETERS:
- *	s: string contains morse code
- */
-void decoder(const char *);
-
 /* fcoder(p, func)
  *	Decode from morse or Encode to morse, inputed
  *	 from Text file
@@ -87,21 +61,4 @@ void fcoder(const char *, void(*mode)(const char *));
  */
 char* readf(const char *);
 
-/* fdecoder(p)
- *	Call fcoder() passing decoder()
- *
- * @PARAMETERS:
- *	p:	Path to the text-file
- */
-void fencoder(const char *, FILE *);
-
-/* fencoder(p)
- *	Call fcoder() passing encoder
- *
- * @PARAMETERS:
- *	p:	Path to text-file
- */
-void fdecoder(const char *, FILE *);
-void decodef(const char *s);
-void encodef(const char *s);
 # endif /* LIBMORSE_H */

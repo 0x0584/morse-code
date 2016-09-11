@@ -61,27 +61,34 @@
  */
 
 # include "libmorse.h"
-
+# include "decode.h"
+# include "encode.h" 
 /* <---------------------( Main )---------------------> */
 int
 main()
 {
   /* Setup the tree */
   make();
+
+
   /* printf("\033[2J\033[;H"); */
   /* printf("\033[2J\033[0;0H"); */
+  /* \033[0m | \x1b[2J\x1b[1;1H */
   printf("\033\143");
   puts("-----encoder-test-----\n");
-  encoder("HELLO WORLD");
+  encoder("youssef achker");
   getchar();
+
   printf("\033\143");
   puts("-----decoder-test-----\n");
   decoder(".... . .-.. .-.. --- / .-- --- .-. .-.. -..");
   getchar();
+
   printf("\033\143");
   puts("-----fdecoder-test-----\n");
   puts(readf("morse.txt"));
   decodef("morse.txt");
+  
   getchar();
   /* puts(""); */
   printf("\033\143");
@@ -89,6 +96,9 @@ main()
   puts(readf("text.txt"));
   encodef("text.txt");
   printf("\033\143");  
+
+
+
   /* Drop the tree */
   drop(); 
 

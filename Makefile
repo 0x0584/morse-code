@@ -2,10 +2,10 @@
 CC = gcc
 CFLAGS =  -O2 -Wall
 LDFLAGS = -I.
-OBJ = main.o libmorse.o init.o
-DEPS = libmorse.h
+OBJ = main.o libmorse.o init.o encode.o decode.o
+DEPS = libmorse.h encode.h decode.h
 EXEC = morse
-ARGS =
+#ARGS = 
 
 all: main
 #	@echo "Finish."
@@ -28,3 +28,5 @@ clean:
 	@echo "Cleaning up.."
 	rm -f $(EXEC)
 	@echo " "
+
+# end of Makefile
