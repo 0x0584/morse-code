@@ -1,35 +1,52 @@
 # Makefile Morse Code
 CC = gcc
-#CFLAGS =  -ggdb -O2 -Wall -Wextra -pedantic -Wpadded 
+RM = rm -f
+EXEC = morse
+
+SRCDIR = src
+OBJDIR = bin
+DEPSDIR = include
+
+SRC := $(shell find $(SRCDIR) -name '*.c')
+OBJ := $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRC))
+DEPS:= $(shell find $(DEPSDIR) -name '*.h')
+
 CFLAGS = -ggdb -O2 -Wall -Wextra -pedantic -Wpadded 
 LDFLAGS = -I.
-OBJ = main.o libmorse.o init.o decode.o encode.o
-DEPS = libmorse.h encode.h decode.h
-EXEC = morse
-#ARGS = 
+
+ARGS = 
 
 all: main
 	@echo "Finish."
 #	@echo " "
 
-main: $(OBJ)
+main: build-dir $(OBJ)
 #	@echo "Building the application core.."
 	$(CC) $(CFLAGS) -o $(EXEC) $(OBJ)
 #	rm -f $(OBJ)
 #	@echo " "
+build-dir:
+	@$(call make-dir)
 
-%.o: %.c $(DEPS)
+define make-dir
+	for dir in $(OBJDIR); \
+	do \
+	mkdir -p $$dir; \
+	done
+endef
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(DEPS)
 #	@echo "Building objects.."
 	$(CC) $(CFLAGS) -c -o $@ $< $(LDFLAGS) 
 #	@echo " "
 
-run: clean all
+run: build
 	./$(EXEC) $(ARGS)
 build:clean all
 clean:
 	@echo "Cleaning up.."
-	rm -f $(EXEC)
-	rm -f $(OBJ)
+	$(RM) $(EXEC)
+	$(RM) $(OBJ)
 #	@echo " "
 
 # end of Makefile
