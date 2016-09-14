@@ -1,36 +1,32 @@
 # include "encode.h"
 
-void
-encodef(const char *s)
+char *
+fencode(const char *s)
 {
-  fcoder(s, encoder);
+  return fcoder(s, encoder);
 }
 
-void
+char *
 encoder(const char *s)
 {
-  fencoder(s,stdout);
-}
+  char *output = (char *) malloc(STRING_SIZE * sizeof(char));
 
-void
-fencoder(const char *s, FILE *f)
-{
   for(;; ++s) {
     char ch = *s;
     if(ch == '\0') break;
-    else if(isalpha(ch)) ch = toupper(ch), fputs(M[ALPHA][ch - 'A'], f);
-    else if(isdigit(ch)) fputs(M[NUMERAL][ch - '0'], f);
-    else if(ch == ' ') fputc('/', f);
+    else if(isalpha(ch)) ch = toupper(ch), strcat(output, M[ALPHA][ch - 'A']);
+    else if(isdigit(ch)) strcat(output, M[NUMERAL][ch - '0']);
+    else if(ch == ' ') strcat(output, "/");
     else if(ch == '\n') {
-      fputc('\n', f);
+      strcat(output, "\n");
       continue;
     }
     else if(ch == '\t') {
-      fputc('\t', f);
+      strcat(output, "\t");
       continue;
     }
-    fputc(' ', f);
+    strcat(output, " ");
   }
-  fputc('\n', f);
+  return output;
 }
 

@@ -9,14 +9,20 @@
 # define ALPHA 0
 # define NUMERAL 1
 # define LINE_SIZE 128
+# define STRING_SIZE 256
+
 /* <-----------------------( Data Structures )-----------------------> */
 /* Morse code tree */
+# pragma pack(push)  /* push current alignment to stack */
+# pragma pack(1)     /* set alignment to 1 byte boundary */
+
 struct tree {
   char c;
   struct tree *dit;
   struct tree *dah;
 } *root;
 
+# pragma pack(pop) /* restore original alignment from stack */
 /* <-----------------------( Global Variables )---------------------> */
 
 extern const char /* Morse code characters */ *alpha[],
@@ -51,7 +57,7 @@ void drop(void);
  *	p:	Path to text-file
  *	func:	Function as argument, (decoder, encoder) 
  */
-void fcoder(const char *, void(*mode)(const char *));
+char *fcoder(const char *, char *(*mode)(const char *));
 
 /* readf(p)
  *	read a whole text file and returns it as (char *)

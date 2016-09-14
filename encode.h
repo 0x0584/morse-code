@@ -1,6 +1,6 @@
-#ifndef ENCODE_H
-#define ENCODE_H
-#include "libmorse.h"
+# ifndef ENCODE_H
+# define ENCODE_H
+# include "libmorse.h"
 
 /* encoder(s)
  *	Encode into morse code, convert text to morse code.
@@ -8,7 +8,7 @@
  * @PARAMETERS:
  *	s:	string contains morse code.
  */
-void encoder(const char *);
+char *encoder(const char *);
 
 /* fencoder(p)
  *	Call fcoder() passing encoder
@@ -16,8 +16,8 @@ void encoder(const char *);
  * @PARAMETERS:
  *	p:	Path to text-file
  */
-void fencoder(const char *, FILE *);
+char *fencoder(const char *);
 
-void encodef(const char *s);
 
-#endif	/* ENCODE_H */
+
+# endif	/* ENCODE_H */
