@@ -1,10 +1,12 @@
-# include "./include/encode.h"
+# include "../include/encode.h"
 
 char *
 fencode(const char *s)
 {
   return fcoder(s, encoder);
 }
+
+/* Bug here: pass the array limit */
 
 char *
 encoder(const char *s)
@@ -26,8 +28,9 @@ encoder(const char *s)
       strcat(output, "\t");
       continue;
     }
-    strcat(output, " ");
+    strcat(output, " ");    
   }
+    strcat(output, " ");    
   
   return output;
 }

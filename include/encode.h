@@ -1,6 +1,6 @@
 # ifndef ENCODE_H
 # define ENCODE_H
-# include "./include/libmorse.h"
+# include "../include/libmorse.h"
 
 /* encoder(s)
  *	Encode into morse code, convert text to morse code.
@@ -17,7 +17,5 @@ char *encoder(const char *);
  *	p:	Path to text-file
  */
 char *fencoder(const char *);
-
-
 
 # endif	/* ENCODE_H */

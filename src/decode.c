@@ -1,4 +1,4 @@
-# include "./include/decode.h"
+# include "../include/decode.h"
 
 void
 _decoder(struct tree *r,const char *s, char *ss)

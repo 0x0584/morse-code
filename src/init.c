@@ -1,4 +1,4 @@
-# include "./include/libmorse.h"
+# include "../include/libmorse.h"
 
 const char *alpha[] = {
   ".-",   /* A */

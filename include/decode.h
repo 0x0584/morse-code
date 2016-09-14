@@ -1,6 +1,6 @@
 # ifndef DECODE_H
 # define DECODE_H
-# include "./include/libmorse.h"
+# include "../include/libmorse.h"
 # define STRING_SIZE 256
 
 /* _decode(r, s)

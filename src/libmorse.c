@@ -1,4 +1,4 @@
-# include "./include/libmorse.h"
+# include "../include/libmorse.h"
 
 /* _insert(r, s, ch) (recursive) 
  *

@@ -23,13 +23,13 @@
 /* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,		*/
 /* MA  02110-1301, USA.							*/
 /*								        */
-/* 	Last modification: 09/11/2016-18:35:23				*/
+/* 	Last modification: 09/14/2016-15:29:10				*/
 /*								        */
 /************************************************************************/
 
-# include "./include/libmorse.h"
-# include "./include/decode.h"
-# include "./include/encode.h"
+# include "../include/libmorse.h"
+# include "../include/decode.h"
+# include "../include/encode.h"
 
 /* <---------------------( Main )---------------------> */
 int
