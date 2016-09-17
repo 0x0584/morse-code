@@ -28,18 +28,12 @@ decoder(const char *ss)
   while(*s) {
     char *str = (char *) strchr(s, ' ');
     o = (char *) realloc(o, sizeof(*str));
-    /* printf(">%p", o); */
-    /* puts("#"); */
     
     if(str) {
-      /* Bug here */
       if((str - s) != 0) {
 	char c[(str - s) + 1];
 	memcpy(c, s, (str - s));
 	c[(str - s)] = '\0';
-	/* puts(c); */
-	/* puts("@"); */
-	/* getchar(); */
 	_decoder(root, c, o);
       }
       else {
@@ -48,19 +42,12 @@ decoder(const char *ss)
       s = str + 1;		/* Move to the next morse character */
     }
     else {
-      /* puts("here"); */
-      /* puts(s); */
       _decoder(root, s, o);
-      /* puts("$"); */
-      /* puts(o); */
       break;
     }
     strcat(output, o);		/* Concatenate the partial and final message */
-    /* puts(output); */
-    /* getchar(); */
     if(!*s) free(o);
   }
-  /* free(s); */
   return output;
 }
 

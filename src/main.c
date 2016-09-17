@@ -37,14 +37,17 @@ main()
 {
   /* Setup the tree */
   make();
-  char s[STRING_SIZE];
+  /* char s[STRING_SIZE]; */
   /* printf("\033[2J\033[;H"); */
   /* printf("\033[2J\033[0;0H"); */
   /* \033[0m | \x1b[2J\x1b[1;1H */
   /* printf("\033\143"); */
-  fgets(s, sizeof(s), stdin);
+  /* fgets(s, sizeof(s), stdin); */
  
-  puts(decoder(encoder(s)));  
+  /* puts(decoder(encoder(s))); */
+  puts(readf("text.txt"));
+  puts(fencoder("text.txt"));
+  /* puts(fdecoder("morse.txt")); */
   /* getchar(); */
   /* printf("\033\143");   */
 

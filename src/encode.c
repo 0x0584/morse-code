@@ -1,15 +1,15 @@
 # include "../include/encode.h"
 
 char *
-fencode(const char *s)
+fencoder(const char *s)
 {
   return fcoder(s, encoder);
 }
 
-/* Bug here: pass the array limit */
+
 
 char *
-encoder(const char *s)
+encoder(const char *s) /* Bug here: pass the array limit */
 {
   char *output = (char *) malloc(STRING_SIZE * sizeof(char));
 
@@ -30,7 +30,7 @@ encoder(const char *s)
     }
     strcat(output, " ");    
   }
-    strcat(output, " ");    
+  strcat(output, " ");    
   
   return output;
 }

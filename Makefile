@@ -14,7 +14,7 @@ DEPS:= $(shell find $(DEPSDIR) -name '*.h')
 CFLAGS = -ggdb -O2 -Wall -Wextra -pedantic -Wpadded 
 LDFLAGS = -I.
 
-ARGS = 
+ARGS = -f morse 
 
 all: main
 	@echo "Finish."
@@ -41,6 +41,10 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(DEPS)
 #	@echo " "
 
 run: build
+	@echo " "
+	@echo "Execution starts, Passed arguments: " $(ARGS)
+	@echo "-------"
+	@echo " "
 	./$(EXEC) $(ARGS)
 build:clean all
 clean:
