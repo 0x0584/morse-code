@@ -9,11 +9,8 @@ fencoder(const char *s)
 char *
 encoder(const char *s) /* Bug here: pass the array limit */
 {
-  char *output = (char *) malloc(STRING_SIZE * sizeof(char));
-  *output = ' ';
-  output = strchr(output, ' ');
-  puts("Beginnig of encoder");
-  /* puts(s); */
+  char *output = (char *) calloc(1,STRING_SIZE * sizeof(char));
+
   for(;; ++s) {
     char ch = *s;
 
@@ -32,7 +29,6 @@ encoder(const char *s) /* Bug here: pass the array limit */
     strcat(output, " ");    
   }
   strcat(output, " ");    
-  printf("the output:\n---------------\n%s\n--------------\n", output);
   return output;
 }
 
