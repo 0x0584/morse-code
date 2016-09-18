@@ -17,11 +17,12 @@ _decoder(struct tree *r,const char *s, char *ss)
 
 char *
 decoder(const char *ss)
-{				
+{
   char *output = (char *) malloc(STRING_SIZE * sizeof(char)); /* Final message */
   char *o = (char *) malloc(sizeof(char)); /* Partial message */
   char *s = (char *) malloc(sizeof(*ss));
-    
+  puts("Beginnig of decoder");
+  getchar();
   strncpy(s, ss, strlen(ss) - 1);
   strcat(s, " ");
 

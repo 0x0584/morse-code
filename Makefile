@@ -42,9 +42,8 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(DEPS)
 
 run: build
 	@echo " "
-	@echo "Execution starts, Passed arguments: " $(ARGS)
-	@echo "-------"
-	@echo " "
+	@echo -e "Passed Arguments:\t \033[0;31m" $(ARGS)
+	@echo -e "\033[0m"
 	./$(EXEC) $(ARGS)
 build:clean all
 clean:

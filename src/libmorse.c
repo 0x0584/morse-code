@@ -86,7 +86,7 @@ readf (const char *dir)
         
     read_size = fread(buffer, sizeof(char), string_size, handler); /* Binary size of the stream */
     buffer[string_size] = '\0';
-    /* puts(buffer); */
+
     if (string_size != read_size) { /* The readied size is != to stream size */
       free(buffer);
       buffer = NULL;
