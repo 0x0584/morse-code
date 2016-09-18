@@ -9,7 +9,7 @@ fencoder(const char *s)
 char *
 encoder(const char *s) /* Bug here: pass the array limit */
 {
-  char *output = (char *) calloc(1,STRING_SIZE * sizeof(char));
+  char *output = (char *) malloc(STRING_SIZE * sizeof(char));
 
   for(;; ++s) {
     char ch = *s;

@@ -45,14 +45,17 @@ main()
   /* fgets(s, sizeof(s), stdin); */
  
   /* puts(decoder(encoder(s))); */
-  puts(readf("text.txt"));
-  puts(fencoder("text.txt"));
+  puts(readf("morse.txt"));
+  /* puts(fencoder("text.txt")); */
+  /* puts("fdecoder"); */
   /* puts(fdecoder("morse.txt")); */
   /* getchar(); */
   /* printf("\033\143");   */
-
+  puts(encoder("anas"));
+  puts(decoder("-. .- .-"));
+  puts(decoder(encoder("anas")));
   /* Drop the tree */
-  drop(); 
-
+  drop();
+  
   return 0;
 }
