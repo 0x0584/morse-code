@@ -100,11 +100,7 @@ char *
 fcoder(const char *path, char*(*mode)(const char *s)) 
 {
   char *s;
-  if((s = readf(path))) {
-    puts(s);
-    return mode(s);
-    
-  }
+  if((s = readf(path))) return mode(s);  
   else return NULL;
   
 }
