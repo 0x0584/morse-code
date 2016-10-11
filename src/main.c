@@ -43,10 +43,13 @@ main()
   /* \033[0m | \x1b[2J\x1b[1;1H */
   /* printf("\033\143"); */
   /* fgets(s, sizeof(s), stdin); */
- 
+  puts("text.txt:");
   /* puts(decoder(encoder(s))); */
   puts(readf("text.txt"));
+  getchar();
+  puts("fencoder:");
   puts(fencoder("text.txt"));
+  /* puts(decoder("... .. .. . . .. ... / - -- ")); */
   /* puts(fdecoder("morse.txt")); */
   /* getchar(); */
   /* printf("\033\143");   */

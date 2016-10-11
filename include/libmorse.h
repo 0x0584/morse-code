@@ -42,7 +42,7 @@ void make(void);
  * @PARAMETERS:
  *	r:	the root of the tree.
  */
-void _drop(struct tree *);
+void _drop(struct tree *root);
 
 /* drop()
  *	Call _drop() and pass root as argument to be freed.
@@ -57,7 +57,7 @@ void drop(void);
  *	p:	Path to text-file
  *	func:	Function as argument, (decoder, encoder) 
  */
-char *fcoder(const char *, char *(*mode)(const char *));
+char *fcoder(const char *path, char *(*mode)(const char *));
 
 /* readf(p)
  *	read a whole text file and returns it as (char *)
@@ -65,6 +65,6 @@ char *fcoder(const char *, char *(*mode)(const char *));
  * @PARAMETERS:
  *	p:	Path to text-file
  */
-char* readf(const char *);
+char* readf(const char *path);
 
 # endif /* LIBMORSE_H */

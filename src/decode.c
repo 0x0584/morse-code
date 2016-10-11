@@ -22,14 +22,17 @@ decoder(const char *ss)
   char *o = (char *) malloc(sizeof(char)); /* Partial message */
   char *s = (char *) malloc(sizeof(*ss));
   puts("Beginnig of decoder");
-  getchar();
+
+  strcpy(output, "");
+  strcpy(o, "");
   strncpy(s, ss, strlen(ss) - 1);
   strcat(s, " ");
-
+  
   while(*s) {
     char *str = (char *) strchr(s, ' ');
     o = (char *) realloc(o, sizeof(*str));
-    
+
+    puts(strcat(o, "."));
     if(str) {
       if((str - s) != 0) {
 	char c[(str - s) + 1];
@@ -37,18 +40,17 @@ decoder(const char *ss)
 	c[(str - s)] = '\0';
 	_decoder(root, c, o);
       }
-      else {
-	puts("str - s == 0");
-      }
       s = str + 1;		/* Move to the next morse character */
     }
     else {
       _decoder(root, s, o);
       break;
     }
+    /* puts(strcat(output, "#")); */
     strcat(output, o);		/* Concatenate the partial and final message */
     if(!*s) free(o);
   }
+  
   return output;
 }
 
