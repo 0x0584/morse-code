@@ -21,18 +21,20 @@ decoder(const char *ss)
   char *output = (char *) malloc(STRING_SIZE * sizeof(char)); /* Final message */
   char *o = (char *) malloc(sizeof(char)); /* Partial message */
   char *s = (char *) malloc(sizeof(*ss));
-  puts("Beginnig of decoder");
 
+  /* Initialisation: */
   strcpy(output, "");
-  strcpy(o, "");
+  strcpy(o, "/");
   strncpy(s, ss, strlen(ss) - 1);
   strcat(s, " ");
+  puts("----");
   
+  /* Beginnnig of process */
   while(*s) {
     char *str = (char *) strchr(s, ' ');
     o = (char *) realloc(o, sizeof(*str));
 
-    puts(strcat(o, "."));
+    /* puts(strcat(o, ".")); */
     if(str) {
       if((str - s) != 0) {
 	char c[(str - s) + 1];
@@ -46,7 +48,6 @@ decoder(const char *ss)
       _decoder(root, s, o);
       break;
     }
-    /* puts(strcat(output, "#")); */
     strcat(output, o);		/* Concatenate the partial and final message */
     if(!*s) free(o);
   }
