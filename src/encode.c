@@ -10,6 +10,7 @@ char *
 encoder(const char *s) /* Bug here: pass the array limit */
 {
   char *output = (char *) malloc(STRING_SIZE * sizeof(char));
+  strcpy(output, "");
 
   for(;; ++s) {
     char ch = *s;
@@ -29,6 +30,7 @@ encoder(const char *s) /* Bug here: pass the array limit */
     strcat(output, " ");    
   }
   strcat(output, " ");    
+  
   return output;
 }
 

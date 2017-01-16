@@ -27,9 +27,10 @@
 /*								        */
 /************************************************************************/
 
-# include "../include/libmorse.h"
+/* # include "../include/libmorse.h" */
 # include "../include/decode.h"
 # include "../include/encode.h"
+# include "../include/otf.h"
 
 /* <---------------------( Main )---------------------> */
 int
@@ -43,17 +44,19 @@ main()
   /* \033[0m | \x1b[2J\x1b[1;1H */
   /* printf("\033\143"); */
   /* fgets(s, sizeof(s), stdin); */
- 
+  /* puts("morse.txt:"); */
   /* puts(decoder(encoder(s))); */
-  puts(readf("morse.txt"));
+  /* puts(readf("morse.txt")); */
+  /* getchar(); */
+  /* puts("fencoder:"); */
   /* puts(fencoder("text.txt")); */
-  /* puts("fdecoder"); */
+  /* puts(decoder("... .. .. . . .. ... / - -- ")); */
   /* puts(fdecoder("morse.txt")); */
   /* getchar(); */
   /* printf("\033\143");   */
-  puts(encoder("anas"));
-  puts(decoder("-. .- .-"));
-  puts(decoder(encoder("anas")));
+  /* puts(  decoder(".... . .-.. .-.. ")); */
+
+  otf();
   /* Drop the tree */
   drop();
   

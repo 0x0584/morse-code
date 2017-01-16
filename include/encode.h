@@ -8,7 +8,7 @@
  * @PARAMETERS:
  *	s:	string contains morse code.
  */
-char *encoder(const char *);
+char *encoder(const char *string);
 
 /* fencoder(p)
  *	Call fcoder() passing encoder
@@ -16,6 +16,6 @@ char *encoder(const char *);
  * @PARAMETERS:
  *	p:	Path to text-file
  */
-char *fencoder(const char *);
+char *fencoder(const char *path);
 
 # endif	/* ENCODE_H */

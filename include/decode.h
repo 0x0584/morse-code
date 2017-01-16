@@ -10,7 +10,7 @@
  *	r:	The Morse tree.
  *	s:	the string to decode.
  */
-void _decoder(struct tree *, const char *, char *);
+void _decoder(struct tree *root, const char *input, char *output);
 
 /* fdecoder(p)
  *	Call fcoder() passing decoder()
@@ -18,8 +18,8 @@ void _decoder(struct tree *, const char *, char *);
  * @PARAMETERS:
  *	p:	Path to the text-file
  */
-char *decoder(const char *);
+char *decoder(const char *string);
 
-char *fdecoder(const char *s);
+char *fdecoder(const char *path);
 
 # endif	/* DECODE_H */
